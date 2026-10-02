@@ -24,12 +24,13 @@ test('two factor challenge can be rendered', function () {
 
     $this->post(route('login'), [
         'email' => $user->email,
-        'password' => 'password',
+        'password' => 'admin123',
     ]);
 
     $this->get(route('two-factor.login'))
         ->assertOk()
-        ->assertInertia(fn (Assert $page) => $page
-            ->component('auth/TwoFactorChallenge'),
+        ->assertInertia(
+            fn(Assert $page) => $page
+                ->component('auth/TwoFactorChallenge'),
         );
 });

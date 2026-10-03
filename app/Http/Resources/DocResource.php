@@ -2,8 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Box;
-use App\Models\Entity;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -24,8 +22,8 @@ class DocResource extends JsonResource
             'type' => $this->type,
             'security' => $this->security,
             'description' =>  $this->description,
-            'box' => Box::findOrFail($this->box_id)->toResource(),
-            'entity' => Entity::findOrFail($this->entity_id)->toResource()
+            'box' => BoxResource::make($this->whenLoaded('box')),
+            'entity' => EntityResource::make($this->whenLoaded('entity'))
         ];
     }
 }

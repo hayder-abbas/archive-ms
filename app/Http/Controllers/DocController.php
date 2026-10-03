@@ -8,12 +8,11 @@ use App\Models\Doc;
 
 class DocController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return inertia('docs/index', [
+            'docs' => Doc::all()->toResourceCollection()
+        ]);
     }
 
     /**

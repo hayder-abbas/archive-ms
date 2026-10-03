@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { Link } from "@inertiajs/vue3";
-import { FileBox, LayoutGrid } from "@lucide/vue";
+import {
+  FileBox,
+  Files,
+  HandCoins,
+  Landmark,
+  LayoutGrid,
+  Logs,
+  Trash,
+} from "@lucide/vue";
 import AppLogo from "@/components/AppLogo.vue";
 import NavFooter from "@/components/NavFooter.vue";
 import NavMain from "@/components/NavMain.vue";
@@ -17,6 +25,10 @@ import {
 import { dashboard } from "@/routes";
 import type { NavItem } from "@/types";
 import boxes from "@/routes/boxes";
+import entities from "@/routes/entities";
+import docs from "@/routes/docs";
+import borrows from "@/routes/borrows";
+import auditLogs from "@/routes/audit-logs";
 
 const mainNavItems: NavItem[] = [
   {
@@ -25,13 +37,39 @@ const mainNavItems: NavItem[] = [
     icon: LayoutGrid,
   },
   {
+    title: "Documents",
+    href: docs.index(),
+    icon: Files,
+  },
+  {
     title: "Boxes",
     href: boxes.index(),
     icon: FileBox,
   },
+  {
+    title: "Borrows",
+    href: borrows.index(),
+    icon: HandCoins,
+  },
+  {
+    title: "Entities",
+    href: entities.index(),
+    icon: Landmark,
+  },
 ];
 
-const footerNavItems: NavItem[] = [];
+const footerNavItems: NavItem[] = [
+  {
+    title: "Audit Logs",
+    href: auditLogs.index(),
+    icon: Logs,
+  },
+  {
+    title: "Trash",
+    href: "#",
+    icon: Trash,
+  },
+];
 </script>
 
 <template>

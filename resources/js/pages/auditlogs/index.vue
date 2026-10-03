@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import boxes from "@/routes/boxes";
-import { Box } from "@/types/box";
+import auditLogs from "@/routes/audit-logs";
+import { AuditLogs } from "@/types/auditlog";
 import { Head } from "@inertiajs/vue3";
 
 defineOptions({
   layout: {
     breadcrumbs: [
       {
-        title: "Boxes",
-        href: boxes.index(),
+        title: "AuditLogs",
+        href: auditLogs.index(),
       },
     ],
   },
 });
 
-const props = defineProps<{ boxes: Box[] }>();
+const props = defineProps<{ auditLogs: AuditLogs[] }>();
 </script>
 
 <template>
-  <Head title="Boxes" />
+  <Head title="AuditLogs" />
 
   <div class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
     <div
       class="relative min-h-screen flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
     >
-      <div v-for="box in props.boxes" :key="box.id">
-        <pre>{{ box }}</pre>
+      <div v-for="log in props.auditLogs" :key="log.id">
+        <pre>{{ log }}</pre>
       </div>
     </div>
   </div>

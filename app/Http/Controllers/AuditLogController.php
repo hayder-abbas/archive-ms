@@ -8,12 +8,11 @@ use App\Models\AuditLog;
 
 class AuditLogController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return inertia('auditlogs/index', [
+            'auditLogs' => AuditLog::all()->toResourceCollection()
+        ]);
     }
 
     /**

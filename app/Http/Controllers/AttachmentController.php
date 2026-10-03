@@ -8,12 +8,11 @@ use App\Models\Attachment;
 
 class AttachmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        // return inertia('attachments/index', [
+        //     'attachments' => Attachment::all()->toResourceCollection()
+        // ]);
     }
 
     /**

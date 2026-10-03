@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('lender', 255);
             $table->string('borrower', 255);
             $table->string('doc_number', 10);
+            $table->date('date');
             $table->timestamps();
         });
     }

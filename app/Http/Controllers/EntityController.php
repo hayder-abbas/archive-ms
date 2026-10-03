@@ -8,12 +8,11 @@ use App\Models\Entity;
 
 class EntityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return inertia('entities/index', [
+            'entities' => Entity::all()->toResourceCollection()
+        ]);
     }
 
     /**

@@ -11,7 +11,10 @@ class BoxController extends Controller
     public function index()
     {
         return inertia('boxes/index', [
-            'boxes' => Box::all()->toResourceCollection()
+            'boxes' => Box::query()
+                ->latest('date')
+                ->paginate(30)
+                ->toResourceCollection()
         ]);
     }
 

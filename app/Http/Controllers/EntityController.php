@@ -11,7 +11,10 @@ class EntityController extends Controller
     public function index()
     {
         return inertia('entities/index', [
-            'entities' => Entity::all()->toResourceCollection()
+            'entities' => Entity::query()
+                ->latest('id')
+                ->get()
+                ->toResourceCollection()
         ]);
     }
 

@@ -14,7 +14,7 @@ defineOptions({
   },
 });
 
-const props = defineProps<{ auditLogs: AuditLogs[] }>();
+const props = defineProps<{ auditLogs: { data: AuditLogs[] } }>();
 </script>
 
 <template>
@@ -24,7 +24,7 @@ const props = defineProps<{ auditLogs: AuditLogs[] }>();
     <div
       class="relative min-h-screen flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
     >
-      <div v-for="log in props.auditLogs" :key="log.id">
+      <div v-for="log in props.auditLogs.data" :key="log.id">
         <pre>{{ log }}</pre>
       </div>
     </div>

@@ -14,7 +14,7 @@ defineOptions({
   },
 });
 
-const props = defineProps<{ borrows: Borrow[] }>();
+const props = defineProps<{ borrows: { data: Borrow[] } }>();
 </script>
 
 <template>
@@ -24,7 +24,7 @@ const props = defineProps<{ borrows: Borrow[] }>();
     <div
       class="relative min-h-screen flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
     >
-      <div v-for="borrow in props.borrows" :key="borrow.id">
+      <div v-for="borrow in props.borrows.data" :key="borrow.id">
         <pre>{{ borrow }}</pre>
       </div>
     </div>

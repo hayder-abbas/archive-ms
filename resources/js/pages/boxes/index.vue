@@ -14,7 +14,7 @@ defineOptions({
   },
 });
 
-const props = defineProps<{ boxes: Box[] }>();
+const props = defineProps<{ boxes: { data: Box[] } }>();
 </script>
 
 <template>
@@ -24,7 +24,7 @@ const props = defineProps<{ boxes: Box[] }>();
     <div
       class="relative min-h-screen flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
     >
-      <div v-for="box in props.boxes" :key="box.id">
+      <div v-for="box in props.boxes.data" :key="box.id">
         <pre>{{ box }}</pre>
       </div>
     </div>

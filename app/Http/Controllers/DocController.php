@@ -11,7 +11,11 @@ class DocController extends Controller
     public function index()
     {
         return inertia('docs/index', [
-            'docs' => Doc::all()->toResourceCollection()
+            'docs' => Doc::query()
+                ->with(['box'])
+                ->latest('date')
+                ->paginate(20)
+                ->toResourceCollection()
         ]);
     }
 

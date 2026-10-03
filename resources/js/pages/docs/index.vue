@@ -14,7 +14,7 @@ defineOptions({
   },
 });
 
-const props = defineProps<{ docs: Doc[] }>();
+const props = defineProps<{ docs: { data: Doc[] } }>();
 </script>
 
 <template>
@@ -24,7 +24,7 @@ const props = defineProps<{ docs: Doc[] }>();
     <div
       class="relative min-h-screen flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
     >
-      <div v-for="doc in props.docs" :key="doc.id">
+      <div v-for="doc in props.docs.data" :key="doc.id">
         <pre>{{ doc }}</pre>
       </div>
     </div>

@@ -7,24 +7,24 @@ defineOptions({
   layout: {
     breadcrumbs: [
       {
-        title: "AuditLogs",
+        title: "sidebar.audit_logs",
         href: auditLogs.index(),
       },
     ],
   },
 });
 
-const props = defineProps<{ auditLogs: AuditLogs[] }>();
+const props = defineProps<{ auditLogs: { data: AuditLogs[] } }>();
 </script>
 
 <template>
-  <Head title="AuditLogs" />
+  <Head :title="$t('sidebar.audit_logs')" />
 
   <div class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
     <div
       class="relative min-h-screen flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
     >
-      <div v-for="log in props.auditLogs" :key="log.id">
+      <div v-for="log in props.auditLogs.data" :key="log.id">
         <pre>{{ log }}</pre>
       </div>
     </div>

@@ -1,54 +1,80 @@
 <script setup lang="ts">
-import { Link, router } from '@inertiajs/vue3';
-import { LogOut, Settings } from '@lucide/vue';
+import { computed } from "vue";
+import { Link, router, usePage } from "@inertiajs/vue3";
+import { LogOut, Settings } from "@lucide/vue";
 import {
-    DropdownMenuGroup,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-} from '@/components/ui/dropdown-menu';
-import UserInfo from '@/components/UserInfo.vue';
-import { logout } from '@/routes';
-import { edit } from '@/routes/profile';
-import type { User } from '@/types';
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
+import UserInfo from "@/components/UserInfo.vue";
+import LocalSelector from "./global/LocalSelector.vue";
+import { logout } from "@/routes";
+import { edit } from "@/routes/profile";
+import type { User } from "@/types";
 
 type Props = {
-    user: User;
+  user: User;
 };
 
 const handleLogout = () => {
-    router.flushAll();
+  router.flushAll();
 };
 
 defineProps<Props>();
+
+const rtl = computed(() => usePage().props.locale === "ar");
 </script>
 
 <template>
-    <DropdownMenuLabel class="p-0 font-normal">
-        <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-            <UserInfo :user="user" :show-email="true" />
-        </div>
-    </DropdownMenuLabel>
-    <DropdownMenuSeparator />
-    <DropdownMenuGroup>
-        <DropdownMenuItem :as-child="true">
-            <Link class="block w-full cursor-pointer" :href="edit()" prefetch>
-                <Settings class="mr-2 h-4 w-4" />
-                Settings
-            </Link>
-        </DropdownMenuItem>
-    </DropdownMenuGroup>
-    <DropdownMenuSeparator />
+  <!-- User Info -->
+  <DropdownMenuLabel class="p-0 font-normal">
+    <div
+      class="flex justify-start items-center gap-2 px-1 py-1.5 text-left text-sm"
+      :class="{ 'flex-row-reverse': rtl }"
+    >
+      <UserInfo :user="user" :show-email="true" :rtl="rtl" />
+    </div>
+  </DropdownMenuLabel>
+
+  <DropdownMenuSeparator />
+  <!-- Local Selector -->
+  <DropdownMenuGroup>
     <DropdownMenuItem :as-child="true">
-        <Link
-            class="block w-full cursor-pointer"
-            :href="logout()"
-            @click="handleLogout"
-            as="button"
-            data-test="logout-button"
-        >
-            <LogOut class="mr-2 h-4 w-4" />
-            Log out
-        </Link>
+      <LocalSelector />
     </DropdownMenuItem>
+  </DropdownMenuGroup>
+
+  <DropdownMenuSeparator />
+  <!-- Settings -->
+  <DropdownMenuGroup>
+    <DropdownMenuItem :as-child="true">
+      <Link
+        class="flex justify-start items-center w-full cursor-pointer"
+        :class="{ 'flex-row-reverse': rtl }"
+        :href="edit()"
+        prefetch
+      >
+        <Settings class="mr-2 h-4 w-4" />
+        {{ $t("sidebar.settings") }}
+      </Link>
+    </DropdownMenuItem>
+  </DropdownMenuGroup>
+
+  <DropdownMenuSeparator />
+  <!-- Logout -->
+  <DropdownMenuItem :as-child="true">
+    <Link
+      class="flex justify-start items-center w-full cursor-pointer"
+      :class="{ 'flex-row-reverse': rtl }"
+      :href="logout()"
+      @click="handleLogout"
+      as="button"
+      data-test="logout-button"
+    >
+      <LogOut class="mr-2 h-4 w-4" />
+      {{ $t("sidebar.logout") }}
+    </Link>
+  </DropdownMenuItem>
 </template>

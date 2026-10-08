@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { Head, Link } from "@inertiajs/vue3";
-import { dashboard} from "@/routes";
+import { dashboard } from "@/routes";
 </script>
 
 <template>
-  <Head title="Welcome">
+  <Head :title="$t('home.title')">
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
   </Head>
@@ -15,17 +15,17 @@ import { dashboard} from "@/routes";
       class="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0"
     >
       <div
-        class="flex flex-col gap-4 items-center shadow-xl p-4 rounded-lg w-full"
+        class="flex flex-col gap-4 items-center shadow-2xl p-4 rounded-lg w-full max-w-3xl"
       >
-        <h1 class="font-bold text-2xl">Archiving system</h1>
-        <p class="text-slate-800">
-          A system for managing and archiving official documents
+        <h1 class="font-bold text-3xl">{{ $t("home.title") }}</h1>
+        <p class="text-slate-800 text-xl mb-6">
+          {{ $t("home.description") }}
         </p>
         <Link
           :href="dashboard()"
-          class="bg-primary text-primary-foreground px-4 py-3 rounded-md hover:opacity-90"
+          class="bg-primary text-primary-foreground px-6 py-2 rounded-md hover:opacity-90"
         >
-          Accessing the system
+          {{ $t("home.accessing_btn") }}
         </Link>
       </div>
     </main>

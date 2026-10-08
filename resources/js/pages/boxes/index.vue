@@ -7,24 +7,24 @@ defineOptions({
   layout: {
     breadcrumbs: [
       {
-        title: "Boxes",
+        title: "sidebar.boxes",
         href: boxes.index(),
       },
     ],
   },
 });
 
-const props = defineProps<{ boxes: Box[] }>();
+const props = defineProps<{ boxes: { data: Box[] } }>();
 </script>
 
 <template>
-  <Head title="Boxes" />
+  <Head :title="$t('sidebar.boxes')" />
 
   <div class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
     <div
       class="relative min-h-screen flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
     >
-      <div v-for="box in props.boxes" :key="box.id">
+      <div v-for="box in props.boxes.data" :key="box.id">
         <pre>{{ box }}</pre>
       </div>
     </div>

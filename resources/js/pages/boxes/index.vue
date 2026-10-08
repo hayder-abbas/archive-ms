@@ -7,7 +7,7 @@ defineOptions({
   layout: {
     breadcrumbs: [
       {
-        title: "Boxes",
+        title: "sidebar.boxes",
         href: boxes.index(),
       },
     ],
@@ -18,7 +18,7 @@ const props = defineProps<{ boxes: { data: Box[] } }>();
 </script>
 
 <template>
-  <Head title="Boxes" />
+  <Head :title="$t('sidebar.boxes')" />
 
   <div class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
     <div

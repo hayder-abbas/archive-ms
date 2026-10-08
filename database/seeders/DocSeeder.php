@@ -15,7 +15,7 @@ class DocSeeder extends Seeder
         Doc::factory()
             ->for(Box::factory()->create())
             ->for(Entity::factory()->create())
-            ->count(30)
+            ->count(100)
             ->hasAttachments(1)
             ->create();
     }

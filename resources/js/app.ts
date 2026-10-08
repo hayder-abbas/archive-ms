@@ -1,37 +1,46 @@
-import { createInertiaApp } from '@inertiajs/vue3';
-import { initializeTheme } from '@/composables/useAppearance';
-import AppLayout from '@/layouts/AppLayout.vue';
-import AuthLayout from '@/layouts/AuthLayout.vue';
-import SettingsLayout from '@/layouts/settings/Layout.vue';
-import { initializeFlashToast } from '@/lib/flashToast';
+import { createInertiaApp } from "@inertiajs/vue3";
+import { i18nVue } from "laravel-vue-i18n";
+import { initializeTheme } from "@/composables/useAppearance";
+import AppLayout from "@/layouts/AppLayout.vue";
+import AuthLayout from "@/layouts/AuthLayout.vue";
+import SettingsLayout from "@/layouts/settings/Layout.vue";
+import { initializeFlashToast } from "@/lib/flashToast";
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || "Laravel";
 
 void createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
     layout: (name) => {
         switch (true) {
-            case name === 'Welcome':
+            case name === "Welcome":
                 return null;
-            case name.startsWith('auth/'):
+            case name.startsWith("auth/"):
                 return AuthLayout;
-            case name.startsWith('settings/'):
+            case name.startsWith("settings/"):
                 return [AppLayout, SettingsLayout];
             default:
                 return AppLayout;
         }
     },
     withApp: (app) => {
-        app.directive('focus', {
+        app.directive("focus", {
             mounted: (el: HTMLElement, shouldFocus) => {
                 if (shouldFocus.value !== false) {
                     el.focus();
                 }
             },
         });
+        app.use(i18nVue, {
+            resolve: async (lang: string) => {
+                const langs = import.meta.glob<{
+                    default: Record<string, string>;
+                }>("../../lang/*.json");
+                return await langs[`../../lang/${lang}.json`]();
+            },
+        });
     },
     progress: {
-        color: '#4B5563',
+        color: "#4B5563",
     },
 });
 

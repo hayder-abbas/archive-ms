@@ -7,7 +7,7 @@ defineOptions({
   layout: {
     breadcrumbs: [
       {
-        title: "Entities",
+        title: "sidebar.entities",
         href: entities.index(),
       },
     ],
@@ -18,7 +18,7 @@ const props = defineProps<{ entities: Entity[] }>();
 </script>
 
 <template>
-  <Head title="Entities" />
+  <Head :title="$t('sidebar.entities')" />
 
   <div class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
     <div

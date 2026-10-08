@@ -7,7 +7,7 @@ defineOptions({
   layout: {
     breadcrumbs: [
       {
-        title: "Borrows",
+        title: "sidebar.borrows",
         href: borrows.index(),
       },
     ],
@@ -18,7 +18,7 @@ const props = defineProps<{ borrows: { data: Borrow[] } }>();
 </script>
 
 <template>
-  <Head title="Borrows" />
+  <Head :title="$t('sidebar.borrows')" />
 
   <div class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
     <div

@@ -7,7 +7,7 @@ defineOptions({
   layout: {
     breadcrumbs: [
       {
-        title: "AuditLogs",
+        title: "sidebar.audit_logs",
         href: auditLogs.index(),
       },
     ],
@@ -18,7 +18,7 @@ const props = defineProps<{ auditLogs: { data: AuditLogs[] } }>();
 </script>
 
 <template>
-  <Head title="AuditLogs" />
+  <Head :title="$t('sidebar.audit_logs')" />
 
   <div class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
     <div

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Link } from "@inertiajs/vue3";
+import { Link, usePage } from "@inertiajs/vue3";
 import {
   FileBox,
   Files,
@@ -29,30 +29,33 @@ import entities from "@/routes/entities";
 import docs from "@/routes/docs";
 import borrows from "@/routes/borrows";
 import auditLogs from "@/routes/audit-logs";
+import { computed } from "vue";
+
+const locale = computed(() => usePage().props.locale);
 
 const mainNavItems: NavItem[] = [
   {
-    title: "Dashboard",
+    title: "sidebar.dashboard",
     href: dashboard(),
     icon: LayoutGrid,
   },
   {
-    title: "Documents",
+    title: "sidebar.documents",
     href: docs.index(),
     icon: Files,
   },
   {
-    title: "Boxes",
+    title: "sidebar.boxes",
     href: boxes.index(),
     icon: FileBox,
   },
   {
-    title: "Borrows",
+    title: "sidebar.borrows",
     href: borrows.index(),
     icon: HandCoins,
   },
   {
-    title: "Entities",
+    title: "sidebar.entities",
     href: entities.index(),
     icon: Landmark,
   },
@@ -60,12 +63,12 @@ const mainNavItems: NavItem[] = [
 
 const footerNavItems: NavItem[] = [
   {
-    title: "Audit Logs",
+    title: "sidebar.audit_logs",
     href: auditLogs.index(),
     icon: Logs,
   },
   {
-    title: "Trash",
+    title: "sidebar.trash",
     href: "#",
     icon: Trash,
   },
@@ -73,7 +76,11 @@ const footerNavItems: NavItem[] = [
 </script>
 
 <template>
-  <Sidebar collapsible="icon" variant="inset">
+  <Sidebar
+    collapsible="icon"
+    variant="inset"
+    :side="locale === 'en' ? 'left' : 'right'"
+  >
     <SidebarHeader>
       <SidebarMenu>
         <SidebarMenuItem>

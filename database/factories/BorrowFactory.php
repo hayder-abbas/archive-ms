@@ -18,8 +18,8 @@ class BorrowFactory extends Factory
     public function definition(): array
     {
         return [
-            'lender' => fake()->name(),
-            'borrower' => fake()->name(),
+            'lender' => fake()->firstName(),
+            'borrower' => fake()->firstName(),
             'doc_number' => fake()->buildingNumber(),
             'date' => fake()->date(),
         ];

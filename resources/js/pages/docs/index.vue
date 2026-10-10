@@ -1,7 +1,13 @@
 <script setup lang="ts">
+import DocumentCard from "@/components/document/DocumentCard.vue";
+import Button from "@/components/ui/button/Button.vue";
 import docs from "@/routes/docs";
-import { Doc } from "@/types/doc";
-import { Head } from "@inertiajs/vue3";
+import FilterByType from "@/components/global/FilterByType.vue";
+import SearchByDate from "@/components/global/SearchByDate.vue";
+import Input from "@/components/ui/input/Input.vue";
+import { Plus } from "@lucide/vue";
+import { Doc } from "@/types/index.js";
+import { Head, Link } from "@inertiajs/vue3";
 
 defineOptions({
   layout: {
@@ -20,13 +26,36 @@ const props = defineProps<{ docs: { data: Doc[] } }>();
 <template>
   <Head :title="$t('sidebar.documents')" />
 
-  <div class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
+  <div class="flex h-full flex-col gap-4 overflow-x-auto rounded-xl p-4">
+    <!-- Add new document button -->
+    <div class="flex justify-end items-center">
+      <Button>
+        <Plus />
+        <Link href="#">{{ $t("docs.new_doc_btn") }}</Link>
+      </Button>
+    </div>
+
+    <!-- Search -->
     <div
-      class="relative min-h-screen flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
+      class="flex flex-wrap justify-between gap-4 flex-col lg:flex-row lg:items-center"
     >
-      <div v-for="doc in props.docs.data" :key="doc.id">
-        <pre>{{ doc }}</pre>
+      <!-- Search by document date -->
+      <SearchByDate />
+
+      <div class="flex gap-4">
+        <!-- Search by document number -->
+        <Input :placeholder="$t('global.search_by_number')" />
+
+        <!-- Filter by document type -->
+        <FilterByType class="md:flex-1 lg:flex-none" />
       </div>
+    </div>
+
+    <!-- Documents -->
+    <div
+      class="relative min-h-screen grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-6 gap-2 p-4 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border overflow-hidden"
+    >
+      <DocumentCard v-for="doc in props.docs.data" :key="doc.id" :doc="doc" />
     </div>
   </div>
 </template>

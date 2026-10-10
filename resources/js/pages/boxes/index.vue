@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import BoxCard from "@/components/boxes/BoxCard.vue";
+import SearchByDate from "@/components/global/SearchByDate.vue";
+import Button from "@/components/ui/button/Button.vue";
+import Input from "@/components/ui/input/Input.vue";
 import boxes from "@/routes/boxes";
 import { Box } from "@/types/box";
-import { Head } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
+import { Plus } from "@lucide/vue";
 
 defineOptions({
   layout: {
@@ -20,13 +25,31 @@ const props = defineProps<{ boxes: { data: Box[] } }>();
 <template>
   <Head :title="$t('sidebar.boxes')" />
 
-  <div class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
+  <div class="flex h-full flex-col gap-4 overflow-x-auto rounded-xl p-4">
+    <!-- Box Search -->
     <div
-      class="relative min-h-screen flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
+      class="flex justify-between gap-4 flex-col lg:flex-row lg:items-center"
     >
-      <div v-for="box in props.boxes.data" :key="box.id">
-        <pre>{{ box }}</pre>
+      <!-- Search by box date -->
+      <SearchByDate />
+
+      <div class="md:flex md:gap-4 space-y-4 md:space-y-0">
+        <!-- Search by box number -->
+        <Input :placeholder="$t('global.search_by_number')" />
+
+        <!-- Add new box button -->
+        <Button class="flex items-center">
+          <Plus />
+          <Link href="#">{{ $t("box.new_box_btn") }}</Link>
+        </Button>
       </div>
+    </div>
+
+    <!-- Boxes -->
+    <div
+      class="relative min-h-screen grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4 p-4 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border overflow-hidden"
+    >
+      <BoxCard v-for="box in props.boxes.data" :key="box.id" :box="box" />
     </div>
   </div>
 </template>
